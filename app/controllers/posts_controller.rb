@@ -11,13 +11,16 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		@post = Post.new(params[:post].permit(:title, :text))
+		@post = Post.new( user_params )
 		if @post.save
 			redirect_to @post
 		else
 			render 'new'
 		end
 	end
+	# Use strong_parameters for attribute whitelisting
+	# Be sure to update your create() and update() controller methods.
+
 
 	def show
 		@post = Post.find(params[:id])
@@ -29,7 +32,7 @@ class PostsController < ApplicationController
 
 	def update
 		@post = Post.find(params[:id])
-		if @post.update(params[:post].permit(:title, :text))
+		if @post.update( user_params )
 			redirect_to @post
 		else 
 			render 'edit'
@@ -46,8 +49,13 @@ class PostsController < ApplicationController
 
 
 	private
+=begin
 	def post_params
 		params.require(:post).permit(:title, :text)
+	end
+=end
+	def user_params
+		params.require(:post).permit(:title, :text, :tags_attributes, :image)
 	end
 
 end
