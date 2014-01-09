@@ -1,6 +1,15 @@
 <%= form_for @post, :html => { :multipart => true } do |f| %>
+  
+  <%= image_tag @post.image.url(:medium) %>
+  <p></p>
+  <%= 
+  f.label :image, "Upload a picture:" 
+  %>
+  <%= 
+  f.file_field :image 
+  #f.file_field :image, nultiple: true, name: "picture[image]"
+  %>
 
-  <%= f.file_field :image %>
 
   <% if @post.errors.any? %>
   <div id="error_explanation">
@@ -26,4 +35,5 @@
   <p>
     <%= f.submit %>
   </p>
+
 <% end %>

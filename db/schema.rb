@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140108071145) do
+ActiveRecord::Schema.define(version: 20140109072509) do
 
   create_table "comments", force: true do |t|
     t.string   "commenter"
@@ -23,15 +23,19 @@ ActiveRecord::Schema.define(version: 20140108071145) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
 
-  create_table "posts", force: true do |t|
-    t.string   "title"
-    t.text     "text"
+  create_table "images", force: true do |t|
+    t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
   end
+
+  add_index "images", ["post_id"], name: "index_images_on_post_id"
+
+  create_table "pictures", force: true do |t|
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 
 end
